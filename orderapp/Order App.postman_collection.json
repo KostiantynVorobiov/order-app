@@ -1,0 +1,822 @@
+{
+	"info": {
+		"_postman_id": "d618fe95-4d79-430e-b470-ee8389939a02",
+		"name": "Order App",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13201448"
+	},
+	"item": [
+		{
+			"name": "Client",
+			"item": [
+				{
+					"name": "Add Client",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"{{$randomFullName}}\",\r\n    \"email\": \"{{$randomEmail}}\",\r\n    \"phoneNumber\": \"{{$randomPhoneNumber}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/client",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"client"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Generate Clients",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const randomFullName = \"John Doe \" + Math.floor(Math.random() * 1000);  // Випадкове ім'я\r",
+									"const randomEmail = \"user\" + Math.floor(Math.random() * 1000) + \"@example.com\";  // Випадковий email\r",
+									"const randomPhoneNumber = \"713-\" + Math.floor(Math.random() * 1000) + \"-\" + Math.floor(Math.random() * 10000);  // Випадковий телефон\r",
+									"\r",
+									"let numberOfRequests = 10;\r",
+									"\r",
+									"for (let i = 0; i < numberOfRequests; i++) {\r",
+									"    pm.sendRequest({\r",
+									"        url: 'http://localhost:8080/client',\r",
+									"        method: 'POST',\r",
+									"        header: {\r",
+									"            'Content-Type': 'application/json'\r",
+									"        },\r",
+									"        body: {\r",
+									"            mode: 'raw',\r",
+									"            raw: JSON.stringify({\r",
+									"                name: randomFullName,\r",
+									"                email: randomEmail,\r",
+									"                phoneNumber: randomPhoneNumber\r",
+									"            })\r",
+									"        }\r",
+									"    }, function (err, res) {\r",
+									"        console.log('Request ' + (i + 1) + ' sent');\r",
+									"        if (err) {\r",
+									"            console.error(err);\r",
+									"        } else {\r",
+									"            console.log(res);\r",
+									"        }\r",
+									"    });\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"{{$randomFullName}}\",\r\n    \"email\": \"{{$randomEmail}}\",\r\n    \"phoneNumber\": \"{{$randomPhoneNumber}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://postman-echo.com/get",
+							"protocol": "https",
+							"host": [
+								"postman-echo",
+								"com"
+							],
+							"path": [
+								"get"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Clients",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/client?sortBy=createdAt&sortDir=DESC&size=5&page=0",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"client"
+							],
+							"query": [
+								{
+									"key": "sortBy",
+									"value": "createdAt"
+								},
+								{
+									"key": "sortDir",
+									"value": "DESC"
+								},
+								{
+									"key": "size",
+									"value": "5"
+								},
+								{
+									"key": "page",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Response Get All Clients",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/client?sortBy=createdAt&sortDir=DESC&size=5&page=0",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"client"
+									],
+									"query": [
+										{
+											"key": "sortBy",
+											"value": "createdAt"
+										},
+										{
+											"key": "sortDir",
+											"value": "DESC"
+										},
+										{
+											"key": "size",
+											"value": "5"
+										},
+										{
+											"key": "page",
+											"value": "0"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 13 Aug 2025 16:58:31 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"data\": {\n        \"content\": [\n            {\n                \"name\": \"Alfonzo Bauch\",\n                \"email\": \"eladia.denesik@yahoo.com\",\n                \"phoneNumber\": \"1-144-426-4910 x463\",\n                \"active\": true,\n                \"inactiveAt\": null,\n                \"createdAt\": \"2025-08-13T19:49:11.27267\",\n                \"suppliedOrders\": [],\n                \"consumedOrders\": [],\n                \"totalProfit\": 0\n            },\n            {\n                \"name\": \"Stacee Hyatt\",\n                \"email\": \"van.parisian@gmail.com\",\n                \"phoneNumber\": \"(033) 529-5231 x27590\",\n                \"active\": true,\n                \"inactiveAt\": null,\n                \"createdAt\": \"2025-08-13T19:49:11.271672\",\n                \"suppliedOrders\": [],\n                \"consumedOrders\": [],\n                \"totalProfit\": 0\n            },\n            {\n                \"name\": \"Horacio Reichel\",\n                \"email\": \"antoine.emmerich@yahoo.com\",\n                \"phoneNumber\": \"1-809-963-5662 x815\",\n                \"active\": true,\n                \"inactiveAt\": null,\n                \"createdAt\": \"2025-08-13T19:49:11.270673\",\n                \"suppliedOrders\": [],\n                \"consumedOrders\": [],\n                \"totalProfit\": 0\n            },\n            {\n                \"name\": \"Ivory Klein IV\",\n                \"email\": \"jeane.cassin@hotmail.com\",\n                \"phoneNumber\": \"973.223.9444 x8988\",\n                \"active\": true,\n                \"inactiveAt\": null,\n                \"createdAt\": \"2025-08-13T19:49:11.268982\",\n                \"suppliedOrders\": [],\n                \"consumedOrders\": [],\n                \"totalProfit\": 0\n            },\n            {\n                \"name\": \"Lacey Gerlach\",\n                \"email\": \"roman.sipes@hotmail.com\",\n                \"phoneNumber\": \"1-453-679-1931 x7628\",\n                \"active\": true,\n                \"inactiveAt\": null,\n                \"createdAt\": \"2025-08-13T19:49:11.268982\",\n                \"suppliedOrders\": [],\n                \"consumedOrders\": [],\n                \"totalProfit\": 0\n            }\n        ],\n        \"pageable\": {\n            \"pageNumber\": 0,\n            \"pageSize\": 5,\n            \"sort\": {\n                \"empty\": false,\n                \"unsorted\": false,\n                \"sorted\": true\n            },\n            \"offset\": 0,\n            \"unpaged\": false,\n            \"paged\": true\n        },\n        \"totalPages\": 2,\n        \"totalElements\": 10,\n        \"last\": false,\n        \"size\": 5,\n        \"number\": 0,\n        \"sort\": {\n            \"empty\": false,\n            \"unsorted\": false,\n            \"sorted\": true\n        },\n        \"first\": true,\n        \"numberOfElements\": 5,\n        \"empty\": false\n    },\n    \"message\": \"success\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Client by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/client/:clientId",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"client",
+								":clientId"
+							],
+							"variable": [
+								{
+									"key": "clientId",
+									"value": "7"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Response Get Client by Id",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/client/:clientId",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"client",
+										":clientId"
+									],
+									"variable": [
+										{
+											"key": "clientId",
+											"value": "7"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 12 Aug 2025 21:15:31 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"data\": {\n        \"name\": \"Blondell McClure\",\n        \"email\": \"conchita.rosenbaum@gmail.com\",\n        \"phoneNumber\": \"585.383.0079\",\n        \"active\": true,\n        \"inactiveAt\": null,\n        \"createdAt\": \"2025-08-13T00:07:55.213521\",\n        \"suppliedOrders\": [\n            {\n                \"id\": 3,\n                \"title\": \"Product Accounts Assistant\",\n                \"price\": 330,\n                \"createdAt\": \"2025-08-13T00:12:50.17188\"\n            },\n            {\n                \"id\": 4,\n                \"title\": \"Chief Accountability Director\",\n                \"price\": 481.68,\n                \"createdAt\": \"2025-08-13T00:15:10.047498\"\n            }\n        ],\n        \"consumedOrders\": [\n            {\n                \"id\": 2,\n                \"title\": \"Chief Division Associate\",\n                \"price\": 330,\n                \"createdAt\": \"2025-08-13T00:12:37.347879\"\n            }\n        ],\n        \"totalProfit\": 481.68\n    },\n    \"message\": \"success\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Update Client by Id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"new FullName\",\r\n    \"email\": \"new.email@yahoo.com\",\r\n    \"phoneNumber\": \"333-555-7777\",\r\n    \"active\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/client/:clintId",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"client",
+								":clintId"
+							],
+							"variable": [
+								{
+									"key": "clintId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deactivate Client by Id",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/client/:clintId/deactivate",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"client",
+								":clintId",
+								"deactivate"
+							],
+							"variable": [
+								{
+									"key": "clintId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search Clients",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/client/search?minProfit=100&maxProfit=300&name=Hahn&email=fred.herzog@gmail.com&phoneNumber=(697) 353-8252&sortBy=createdAt&sortDir=DESC&size=5&page=0",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"client",
+								"search"
+							],
+							"query": [
+								{
+									"key": "minProfit",
+									"value": "100"
+								},
+								{
+									"key": "maxProfit",
+									"value": "300"
+								},
+								{
+									"key": "name",
+									"value": "Hahn"
+								},
+								{
+									"key": "email",
+									"value": "fred.herzog@gmail.com"
+								},
+								{
+									"key": "phoneNumber",
+									"value": "(697) 353-8252"
+								},
+								{
+									"key": "sortBy",
+									"value": "createdAt"
+								},
+								{
+									"key": "sortDir",
+									"value": "DESC"
+								},
+								{
+									"key": "size",
+									"value": "5"
+								},
+								{
+									"key": "page",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Order",
+			"item": [
+				{
+					"name": "Create new Order",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idempotencyId\": \"{{$randomUUID}}\",\r\n    \"supplierId\": 6,\r\n    \"consumerId\": 5,\r\n    \"title\": \"{{$randomJobTitle}}\",\r\n    \"price\": {{$randomPrice}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/order",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Order by Id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"supplierId\": 7,\r\n    \"consumerId\": 4,\r\n    \"title\": \"{{$randomJobTitle}}\",\r\n    \"price\": {{$randomPrice}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/order/:orderId",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"order",
+								":orderId"
+							],
+							"variable": [
+								{
+									"key": "orderId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Response Get Order by Id",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"supplierId\": 7,\r\n    \"consumerId\": 4,\r\n    \"title\": \"{{$randomJobTitle}}\",\r\n    \"price\": {{$randomPrice}}\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/order/:orderId",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"order",
+										":orderId"
+									],
+									"variable": [
+										{
+											"key": "orderId",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 12 Aug 2025 22:26:10 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"data\": {\n        \"id\": 2,\n        \"title\": \"Internal Solutions Coordinator\",\n        \"supplierId\": 6,\n        \"consumerId\": 5,\n        \"price\": 432.09,\n        \"createdAt\": \"2025-08-13T01:25:23.939967\"\n    },\n    \"message\": \"success\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get All Orders",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"supplierId\": 7,\r\n    \"consumerId\": 4,\r\n    \"title\": \"{{$randomJobTitle}}\",\r\n    \"price\": {{$randomPrice}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/order",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"order"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Test Scenarios",
+			"item": [
+				{
+					"name": "Run Scenario 1",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/test/scenario-1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"test",
+								"scenario-1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Response Run Scenario 1",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/test/scenario-1",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"test",
+										"scenario-1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain;charset=UTF-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1503"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 14 Aug 2025 11:17:45 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "Attempt 1: SUCCESS! Order created.\nAttempt 2: Other ERROR: 400  on POST request for \"http://localhost:8080/order\": \"{\"success\":false,\"data\":null,\"message\":\"This order is already being processed.\"}\"\nAttempt 3: Other ERROR: 400  on POST request for \"http://localhost:8080/order\": \"{\"success\":false,\"data\":null,\"message\":\"This order is already being processed.\"}\"\nAttempt 4: Other ERROR: 400  on POST request for \"http://localhost:8080/order\": \"{\"success\":false,\"data\":null,\"message\":\"This order is already being processed.\"}\"\nAttempt 5: Other ERROR: 400  on POST request for \"http://localhost:8080/order\": \"{\"success\":false,\"data\":null,\"message\":\"This order is already being processed.\"}\"\nAttempt 6: Other ERROR: 400  on POST request for \"http://localhost:8080/order\": \"{\"success\":false,\"data\":null,\"message\":\"This order is already being processed.\"}\"\nAttempt 7: Other ERROR: 400  on POST request for \"http://localhost:8080/order\": \"{\"success\":false,\"data\":null,\"message\":\"This order is already being processed.\"}\"\nAttempt 8: Other ERROR: 400  on POST request for \"http://localhost:8080/order\": \"{\"success\":false,\"data\":null,\"message\":\"This order is already being processed.\"}\"\nAttempt 9: Other ERROR: 400  on POST request for \"http://localhost:8080/order\": \"{\"success\":false,\"data\":null,\"message\":\"This order is already being processed.\"}\"\nAttempt 10: Other ERROR: 400  on POST request for \"http://localhost:8080/order\": \"{\"success\":false,\"data\":null,\"message\":\"This order is already being processed.\"}\"\n"
+						}
+					]
+				},
+				{
+					"name": "Run Scenario 2",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/test/scenario-2",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"test",
+								"scenario-2"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Response Run Scenario 2",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/test/scenario-2",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"test",
+										"scenario-2"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain;charset=UTF-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1542"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 14 Aug 2025 12:21:02 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "Attempt 1 (price 100,00): Other ERROR: 400  on POST request for \"http://localhost:8080/order\": \"{\"success\":false,\"data\":null,\"message\":\"Profit limit exceeded.\"}\"\nAttempt 2 (price 90,00): Other ERROR: 400  on POST request for \"http://localhost:8080/order\": \"{\"success\":false,\"data\":null,\"message\":\"Profit limit exceeded.\"}\"\nAttempt 3 (price 80,00): Other ERROR: 400  on POST request for \"http://localhost:8080/order\": \"{\"success\":false,\"data\":null,\"message\":\"Profit limit exceeded.\"}\"\nAttempt 4 (price 70,00): Other ERROR: 400  on POST request for \"http://localhost:8080/order\": \"{\"success\":false,\"data\":null,\"message\":\"Profit limit exceeded.\"}\"\nAttempt 5 (price 60,00): Other ERROR: 400  on POST request for \"http://localhost:8080/order\": \"{\"success\":false,\"data\":null,\"message\":\"Profit limit exceeded.\"}\"\nAttempt 6 (price 50,00): Other ERROR: 400  on POST request for \"http://localhost:8080/order\": \"{\"success\":false,\"data\":null,\"message\":\"Profit limit exceeded.\"}\"\nAttempt 7 (price 40,00): Other ERROR: 400  on POST request for \"http://localhost:8080/order\": \"{\"success\":false,\"data\":null,\"message\":\"Profit limit exceeded.\"}\"\nAttempt 8 (price 30,00): SUCCESS! Order created.\nAttempt 9 (price 20,00): Other ERROR: 400  on POST request for \"http://localhost:8080/order\": \"{\"success\":false,\"data\":null,\"message\":\"Order already exists with this business key\"}\"\nAttempt 10 (price 10,00): Other ERROR: 400  on POST request for \"http://localhost:8080/order\": \"{\"success\":false,\"data\":null,\"message\":\"Order already exists with this business key\"}\"\n"
+						}
+					]
+				},
+				{
+					"name": "Run Scenario 3",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/test/scenario-3",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"test",
+								"scenario-3"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Response Run Scenario 3",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/test/scenario-32",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"test",
+										"scenario-32"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain;charset=UTF-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "488"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 14 Aug 2025 13:51:54 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "Order 5: SUCCESS! Order created.\nClient with ID 1 was successfully deactivated.\nOrder 1: ERROR: {\"success\":false,\"data\":null,\"message\":\"Consumer became inactive during processing.\"}\nOrder 4: ERROR: {\"success\":false,\"data\":null,\"message\":\"Consumer became inactive during processing.\"}\nOrder 2: ERROR: {\"success\":false,\"data\":null,\"message\":\"Consumer became inactive during processing.\"}\nOrder 3: ERROR: {\"success\":false,\"data\":null,\"message\":\"Consumer became inactive during processing.\"}\n"
+						},
+						{
+							"name": "Response Run Scenario 32",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/test/scenario-32",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"test",
+										"scenario-32"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain;charset=UTF-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "419"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 14 Aug 2025 14:11:49 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "Order 4: SUCCESS! Order created.\nOrder 2: SUCCESS! Order created.\nClient with ID 1 was successfully deactivated.\nOrder 1: ERROR: {\"success\":false,\"data\":null,\"message\":\"Consumer became inactive during processing.\"}\nOrder 5: ERROR: {\"success\":false,\"data\":null,\"message\":\"Consumer became inactive during processing.\"}\nOrder 3: ERROR: {\"success\":false,\"data\":null,\"message\":\"Consumer became inactive during processing.\"}\n"
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}

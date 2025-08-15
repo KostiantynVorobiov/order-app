@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="mPay" />
+        <module name="orderapp" />
+        <module name="orderApp (2) (groupId)" />
+        <module name="testScenario" />
+        <module name="orderapp (1) (com)" />
+        <module name="orderService" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="orderapp (1)" target="21" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="orderapp" options="-parameters" />
+      <module name="orderapp (1)" options="-parameters" />
+      <module name="orderapp (1) (com)" options="-parameters" />
+      <module name="testScenario" options="-parameters" />
+    </option>
+  </component>
+</project>

@@ -1,0 +1,9 @@
+version: '3.8'
+
+services:
+  test-scenario:
+    image: test-scenario:latest
+    build: .
+    container_name: test-scenario
+    ports:
+      - "8081:8081"
