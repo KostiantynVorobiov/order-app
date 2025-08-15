@@ -51,8 +51,8 @@ The program allows you to perform the following operations:
 ### Step 1: Cloning the repository:
 
 ```bash
-git clone https://github.com/yourusername/order-management.git
-cd order-management
+git clone https://github.com/KostiantynVorobiov/order-app.git
+cd orderapp
 ```
 
 ### Step 2: Run the application and database using Docker Compose:
@@ -76,13 +76,19 @@ cd order-management
 
 ### Step 2: Build the project
 ```bash
-./mvnw clean install   -for 
+# Для Linux та macOS:
+./mvnw clean install
+
+# Для Windows:
 mvnw.cmd clean install
 ```
 
 ### Step 3: Run the application
 ```bash
+# Для Linux та macOS:
 ./mvnw spring-boot:run
+
+# Для Windows:
 mvnw.cmd spring-boot:run
 ```
 
